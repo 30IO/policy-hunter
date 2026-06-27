@@ -9,13 +9,13 @@ import About from './components/About'
 import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
 import Toast from './components/Toast'
+import LoginModal from './components/LoginModal'
+import RegisterModal from './components/RegisterModal'
 
 const Results = lazy(() => import('./components/Results'))
 const PolicyModal = lazy(() => import('./components/PolicyModal'))
 const MaterialsModal = lazy(() => import('./components/MaterialsModal'))
 const DiagnosisModal = lazy(() => import('./components/DiagnosisModal'))
-const LoginModal = lazy(() => import('./components/LoginModal'))
-const RegisterModal = lazy(() => import('./components/RegisterModal'))
 const SearchPage = lazy(() => import('./components/SearchPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
 const CompareModal = lazy(() => import('./components/CompareModal'))
@@ -221,36 +221,31 @@ function AppContent() {
           />
         )}
         
-        {showLoginModal && (
-          <LoginModal 
-            isOpen={showLoginModal}
-            onClose={() => setShowLoginModal(false)}
-            onLogin={handleLogin}
-            onSwitchToRegister={() => {
-              setShowLoginModal(false)
-              setShowRegisterModal(true)
-            }}
-          />
-        )}
-        
-        {showRegisterModal && (
-          <RegisterModal 
-            isOpen={showRegisterModal}
-            onClose={() => setShowRegisterModal(false)}
-            onRegister={handleRegister}
-            onSwitchToLogin={() => {
-              setShowRegisterModal(false)
-              setShowLoginModal(true)
-            }}
-          />
-        )}
-        
-        <CompareModal 
-          isOpen={showCompareModal}
-          onClose={() => setShowCompareModal(false)}
-          onPolicyClick={handlePolicyClick}
-        />
       </Suspense>
+      
+      {showLoginModal && (
+        <LoginModal 
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          onLogin={handleLogin}
+          onSwitchToRegister={() => {
+            setShowLoginModal(false)
+            setShowRegisterModal(true)
+          }}
+        />
+      )}
+      
+      {showRegisterModal && (
+        <RegisterModal 
+          isOpen={showRegisterModal}
+          onClose={() => setShowRegisterModal(false)}
+          onRegister={handleRegister}
+          onSwitchToLogin={() => {
+            setShowRegisterModal(false)
+            setShowLoginModal(true)
+          }}
+        />
+      )}
     </div>
   )
 }

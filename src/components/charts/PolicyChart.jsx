@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, LineElement, PointElement, Filler } from 'chart.js'
-import { Bar, Doughnut, Line } from 'react-chartjs-2'
+import { Bar, Doughnut } from 'react-chartjs-2'
 import { useStore } from '../../store/useStore'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, LineElement, PointElement, Filler)
@@ -48,7 +48,7 @@ const PolicyChart = ({ filteredData }) => {
         data: Object.values(industryData),
         backgroundColor: '#2563EB',
         borderRadius: 8,
-        barThickness: 40
+        barThickness: 28
       }
     ]
   }
@@ -68,20 +68,14 @@ const PolicyChart = ({ filteredData }) => {
     ]
   }
 
-  const lineChartData = {
+  const horizontalBarData = {
     labels: Object.keys(regionData),
     datasets: [
       {
         label: '地区政策量',
         data: Object.values(regionData),
-        fill: true,
-        backgroundColor: 'rgba(37, 99, 235, 0.1)',
-        borderColor: '#2563EB',
-        tension: 0.4,
-        pointBackgroundColor: '#2563EB',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: 4
+        backgroundColor: '#2563EB',
+        borderRadius: 8
       }
     ]
   }
@@ -116,7 +110,9 @@ const PolicyChart = ({ filteredData }) => {
           display: false
         },
         ticks: {
-          color: theme === 'light' ? '#64748B' : '#94A3B8'
+          color: theme === 'light' ? '#64748B' : '#94A3B8',
+          maxRotation: 45,
+          minRotation: 45
         }
       }
     }
@@ -145,9 +141,10 @@ const PolicyChart = ({ filteredData }) => {
     cutout: '65%'
   }
 
-  const lineOptions = {
+  const horizontalBarOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    indexAxis: 'y',
     plugins: {
       legend: {
         display: false
@@ -161,7 +158,7 @@ const PolicyChart = ({ filteredData }) => {
       }
     },
     scales: {
-      y: {
+      x: {
         beginAtZero: true,
         grid: {
           color: theme === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.1)'
@@ -170,7 +167,7 @@ const PolicyChart = ({ filteredData }) => {
           color: theme === 'light' ? '#64748B' : '#94A3B8'
         }
       },
-      x: {
+      y: {
         grid: {
           display: false
         },
@@ -206,7 +203,7 @@ const PolicyChart = ({ filteredData }) => {
           地区政策分布
         </h3>
         <div className="h-64">
-          <Line data={lineChartData} options={lineOptions} />
+          <Bar data={horizontalBarData} options={horizontalBarOptions} />
         </div>
       </div>
     </div>

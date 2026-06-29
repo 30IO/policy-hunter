@@ -5,6 +5,7 @@ const Button = ({
   variant = 'primary',
   size = 'md',
   disabled = false,
+  loading = false,
   className = '',
   ...props
 }) => {
@@ -12,16 +13,16 @@ const Button = ({
 
   const variants = {
     primary: {
-      light: 'bg-[#2563EB] text-white hover:bg-[#1D4ED8] active:scale-95',
-      dark: 'bg-[#3B82F6] text-white hover:bg-[#2563EB] active:scale-95'
+      light: 'bg-[#2563EB] text-white hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-blue-500/25 active:scale-95',
+      dark: 'bg-[#3B82F6] text-white hover:bg-[#2563EB] hover:shadow-lg hover:shadow-blue-500/25 active:scale-95'
     },
     secondary: {
-      light: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-      dark: 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+      light: 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:scale-95',
+      dark: 'bg-gray-700 text-gray-200 hover:bg-gray-600 active:scale-95'
     },
     outline: {
-      light: 'border border-gray-200 text-gray-700 hover:bg-gray-50',
-      dark: 'border border-gray-600 text-gray-200 hover:bg-gray-700'
+      light: 'border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 active:scale-95',
+      dark: 'border border-gray-600 text-gray-200 hover:bg-gray-700 hover:border-gray-500 active:scale-95'
     },
     ghost: {
       light: 'text-gray-600 hover:bg-gray-100',
@@ -35,6 +36,12 @@ const Button = ({
     lg: 'px-6 py-3 text-base'
   }
 
+  const spinnerSizes = {
+    sm: 'w-4 h-4',
+    md: 'w-5 h-5',
+    lg: 'w-6 h-6'
+  }
+
   return (
     <button
       className={`
@@ -46,10 +53,17 @@ const Button = ({
         ${sizes[size]}
         ${className}
       `}
-      disabled={disabled}
+      disabled={disabled || loading}
       {...props}
     >
-      {children}
+      {loading ? (
+        <>
+          <div className={`${spinnerSizes[size]} border-2 border-current border-t-transparent rounded-full animate-spin`} />
+          <span className="opacity-70">处理中</span>
+        </>
+      ) : (
+        children
+      )}
     </button>
   )
 }

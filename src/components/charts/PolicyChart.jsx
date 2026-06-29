@@ -179,34 +179,50 @@ const PolicyChart = ({ filteredData }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="rounded-2xl p-6 border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          行业政策分布
-        </h3>
-        <div className="h-64">
-          <Bar data={barChartData} options={options} />
+    <section className="py-24 px-4 bg-white dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <span className="inline-block px-4 py-2 rounded-full bg-blue-50 text-[#2563EB] text-sm font-medium mb-4 dark:bg-blue-900/30">
+            数据洞察
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white mb-4">
+            政策数据分析
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-base sm:text-lg">
+            基于海量政策数据，为您呈现行业趋势和匹配分析
+          </p>
         </div>
-      </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="rounded-2xl p-6 border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+              行业政策分布
+            </h3>
+            <div className="h-64">
+              <Bar data={barChartData} options={options} />
+            </div>
+          </div>
 
-      <div className="rounded-2xl p-6 border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          匹配度分布
-        </h3>
-        <div className="h-64">
-          <Doughnut data={doughnutData} options={doughnutOptions} />
-        </div>
-      </div>
+          <div className="rounded-2xl p-6 border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+              匹配度分布
+            </h3>
+            <div className="h-64">
+              <Doughnut data={doughnutData} options={doughnutOptions} />
+            </div>
+          </div>
 
-      <div className="rounded-2xl p-6 border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          地区政策分布
-        </h3>
-        <div className="h-64">
-          <Bar data={horizontalBarData} options={horizontalBarOptions} />
+          <div className="rounded-2xl p-6 border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+              地区政策分布
+            </h3>
+            <div className="h-64">
+              <Bar data={horizontalBarData} options={horizontalBarOptions} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

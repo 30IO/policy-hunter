@@ -41,17 +41,17 @@ function Hero({ onSubmit }) {
       <div className="max-w-5xl mx-auto text-center relative z-10">
         <div className="mb-6 inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-50 text-[#2563EB] text-sm font-medium dark:bg-blue-900/30">
           <Sparkles className="w-4 h-4" />
-          <span>政策匹配 · 精准推荐 · 专业服务</span>
+          <span>智能政策匹配平台</span>
         </div>
         
         <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-6 leading-tight tracking-tight">
-          <span className="text-gray-900 dark:text-white">发现政策红利</span>
+          <span className="text-gray-900 dark:text-white">让每一家企业</span>
           <br />
-          <span className="text-[#2563EB]">助力企业发展</span>
+          <span className="text-[#2563EB]">都能享受到政策红利</span>
         </h1>
         
-        <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
-          输入企业名称或上传商业计划书，快速匹配最适合的政策，助您轻松获取政府补贴
+        <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          输入企业名称，AI智能分析匹配最适合的政府补贴政策，平均匹配率高达85%，已累计帮助企业获取超50亿补贴资金
         </p>
 
         <form onSubmit={handleSubmit} className="relative max-w-3xl mx-auto mb-8">
@@ -92,24 +92,18 @@ function Hero({ onSubmit }) {
           <DropZone ref={dropZoneRef} onFileSelected={onSubmit} />
         </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-500 dark:text-gray-400">
-          <div className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 rounded-lg bg-green-50 dark:bg-green-900/30 flex items-center justify-center group-hover:bg-green-100 dark:group-hover:bg-green-900/40 transition-colors">
-              <div className="w-2 h-2 rounded-full bg-green-500"></div>
-            </div>
-            <span>已服务 10,000+ 企业</span>
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">10,000+</div>
+            <div className="text-gray-500 dark:text-gray-400 text-sm">已服务企业数量</div>
           </div>
-          <div className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 transition-colors">
-              <Award className="w-4 h-4 text-[#2563EB]" />
-            </div>
-            <span>累计匹配补贴 50 亿+</span>
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="text-3xl font-bold text-[#2563EB] mb-1">50亿+</div>
+            <div className="text-gray-500 dark:text-gray-400 text-sm">累计匹配补贴金额</div>
           </div>
-          <div className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center group-hover:bg-amber-100 dark:group-hover:bg-amber-900/40 transition-colors">
-              <TrendingUp className="w-4 h-4 text-amber-600" />
-            </div>
-            <span>平均匹配率 85%</span>
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">85%</div>
+            <div className="text-gray-500 dark:text-gray-400 text-sm">平均政策匹配率</div>
           </div>
         </div>
 

@@ -79,10 +79,10 @@ function Features() {
             核心功能
           </span>
           <h2 className={`text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white mb-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            为什么选择我们
+            六大核心优势
           </h2>
           <p className={`text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-base sm:text-lg transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            企服雷达致力于帮助企业快速发现并获取政府补贴，让政策红利惠及每一家企业
+            全方位政策服务能力，助力企业精准获取政策红利
           </p>
         </div>
 

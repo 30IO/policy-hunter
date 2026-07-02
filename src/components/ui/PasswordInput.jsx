@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Eye, EyeOff, CheckCircle2, XCircle, Shield } from 'lucide-react'
+import { useState, useEffect, useMemo } from 'react'
+import { Eye, EyeOff, CheckCircle2, XCircle, Shield, AlertCircle } from 'lucide-react'
 
 function PasswordInput({ 
   label, 
@@ -46,6 +46,17 @@ function PasswordInput({
     } else {
       setIsMatching(null)
     }
+  }, [isConfirm, confirmValue, value])
+
+  const charactersMatch = useMemo(() => {
+    if (!isConfirm || !confirmValue) return []
+    return confirmValue.split('').map((char, index) => ({
+      char,
+      inputChar: value[index],
+      isMatch: value[index] === char,
+      isCurrent: index === value.length,
+      hasInput: !!value[index]
+    }))
   }, [isConfirm, confirmValue, value])
 
   const getStrengthColor = () => {
@@ -157,18 +168,62 @@ function PasswordInput({
         </div>
       )}
       
-      {isConfirm && isMatching !== null && !error && (
-        <div className={`mt-2 text-xs flex items-center gap-1.5 ${isMatching ? 'text-green-500' : 'text-red-500'}`}>
-          {isMatching ? (
-            <>
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              密码匹配
-            </>
-          ) : (
-            <>
-              <XCircle className="w-3.5 h-3.5" />
-              两次输入的密码不一致
-            </>
+      {isConfirm && confirmValue && (
+        <div className="mt-2">
+          <div className={`text-xs flex items-center gap-1.5 ${isMatching ? 'text-green-500' : 'text-red-500'} mb-2`}>
+            {isMatching ? (
+              <>
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                密码匹配
+              </>
+            ) : (
+              <>
+                <AlertCircle className="w-3.5 h-3.5" />
+                两次输入的密码不一致，请检查以下字符
+              </>
+            )}
+          </div>
+          
+          <div className="flex flex-wrap gap-1">
+            {charactersMatch.map((item, index) => (
+              <div key={index} className="relative group">
+                <span
+                  className={`inline-flex items-center justify-center w-7 h-7 rounded text-sm font-mono transition-all duration-200 ${
+                    item.isCurrent && !item.hasInput
+                      ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-500 ring-2 ring-blue-300 dark:ring-blue-700'
+                      : item.isMatch
+                        ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                        : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                  }`}
+                >
+                  {item.isCurrent && !item.hasInput ? (
+                    <span className="w-1 h-3 bg-blue-500 rounded-full animate-pulse" />
+                  ) : item.hasInput ? (
+                    item.inputChar
+                  ) : (
+                    <span className="text-gray-300">*</span>
+                  )}
+                </span>
+                
+                {!item.isMatch && item.hasInput && (
+                  <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    期望: <span className="font-mono">{item.char}</span>
+                  </div>
+                )}
+                
+                {item.isCurrent && (
+                  <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    输入位置
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          {value.length > confirmValue.length && (
+            <p className="text-xs text-orange-500 mt-1">
+              确认密码超出了原始密码长度
+            </p>
           )}
         </div>
       )}

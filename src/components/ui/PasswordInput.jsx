@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+// PasswordInput component with real-time strength detection and character-level comparison
 import { Eye, EyeOff, CheckCircle2, XCircle, Shield, AlertCircle } from 'lucide-react'
 
 function PasswordInput({ 

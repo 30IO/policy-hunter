@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { X, Mail, Lock, User, Eye, EyeOff, ArrowRight, CheckCircle, Loader2 } from 'lucide-react'
+import { X, Mail, User, ArrowRight, CheckCircle, Loader2 } from 'lucide-react'
+import PasswordInput from './ui/PasswordInput'
 
 function RegisterModal({ isOpen, onClose, onRegister, onSwitchToLogin }) {
   const [formData, setFormData] = useState({
@@ -8,8 +9,6 @@ function RegisterModal({ isOpen, onClose, onRegister, onSwitchToLogin }) {
     password: '',
     confirmPassword: ''
   })
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
   const [agreed, setAgreed] = useState(false)
@@ -139,61 +138,23 @@ function RegisterModal({ isOpen, onClose, onRegister, onSwitchToLogin }) {
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">密码</label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  placeholder="请输入密码"
-                  className={`w-full pl-12 pr-12 py-3 bg-gray-50 dark:bg-gray-900 border rounded-xl text-gray-900 dark:text-white placeholder-gray-400 outline-none transition-all ${
-                    errors.password ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-gray-200 dark:border-gray-700 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10'
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5 text-gray-400" />
-                  ) : (
-                    <Eye className="w-5 h-5 text-gray-400" />
-                  )}
-                </button>
-              </div>
-              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-            </div>
+            <PasswordInput
+              label="密码"
+              value={formData.password}
+              onChange={(value) => setFormData({ ...formData, password: value })}
+              placeholder="请输入密码（8位以上，包含字母和数字）"
+              error={errors.password}
+            />
 
-            <div>
-              <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">确认密码</label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  value={formData.confirmPassword}
-                  onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  placeholder="请再次输入密码"
-                  className={`w-full pl-12 pr-12 py-3 bg-gray-50 dark:bg-gray-900 border rounded-xl text-gray-900 dark:text-white placeholder-gray-400 outline-none transition-all ${
-                    errors.confirmPassword ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-gray-200 dark:border-gray-700 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10'
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="w-5 h-5 text-gray-400" />
-                  ) : (
-                    <Eye className="w-5 h-5 text-gray-400" />
-                  )}
-                </button>
-              </div>
-              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
-            </div>
+            <PasswordInput
+              label="确认密码"
+              value={formData.confirmPassword}
+              onChange={(value) => setFormData({ ...formData, confirmPassword: value })}
+              placeholder="请再次输入密码"
+              error={errors.confirmPassword}
+              confirmValue={formData.password}
+              isConfirm
+            />
 
             <div className="flex items-start space-x-3">
               <label className="flex items-center cursor-pointer">

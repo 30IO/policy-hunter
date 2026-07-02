@@ -184,36 +184,38 @@ function PasswordInput({
             )}
           </div>
           
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {charactersMatch.map((item, index) => (
               <div key={index} className="relative group">
                 <span
-                  className={`inline-flex items-center justify-center w-7 h-7 rounded text-sm font-mono transition-all duration-200 ${
+                  className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs transition-all duration-200 ${
                     item.isCurrent && !item.hasInput
-                      ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-500 ring-2 ring-blue-300 dark:ring-blue-700'
+                      ? 'bg-blue-500 text-white animate-pulse'
                       : item.isMatch
                         ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                         : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
                   }`}
                 >
                   {item.isCurrent && !item.hasInput ? (
-                    <span className="w-1 h-3 bg-blue-500 rounded-full animate-pulse" />
+                    ''
+                  ) : item.isMatch ? (
+                    <CheckCircle2 className="w-3.5 h-3.5" />
                   ) : item.hasInput ? (
-                    item.inputChar
+                    <XCircle className="w-3.5 h-3.5" />
                   ) : (
-                    <span className="text-gray-300">*</span>
+                    ''
                   )}
                 </span>
                 
-                {!item.isMatch && item.hasInput && (
+                {item.isCurrent && (
                   <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                    期望: <span className="font-mono">{item.char}</span>
+                    第 {index + 1} 位
                   </div>
                 )}
                 
-                {item.isCurrent && (
+                {!item.isMatch && item.hasInput && (
                   <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                    输入位置
+                    第 {index + 1} 位不匹配
                   </div>
                 )}
               </div>
